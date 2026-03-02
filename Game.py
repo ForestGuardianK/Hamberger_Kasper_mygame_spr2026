@@ -72,17 +72,20 @@ class Game:
         self.running = True
         self.playing = True
         self.game_cooldown = Cooldown(5000)
-        self.load_data()
+
     
     # a method is a function tied to a Class
 
     def load_data(self):
-        # 
         self.game_dir = path.dirname(__file__)
+        self.img_dir = path.join(self.game_dir, 'images')
+        self.wall_img = pg.image.load(path.join(self.img_dir, 'Wall.png')).convert_alpha()
+        self.Player_img = pg.image.load(path.join(self.img_dir, 'sprite_sheet.png')).convert_alpha()
         self.map = Map(path.join(self.game_dir, 'level1.txt'))
         print('data is loaded')
 
     def new(self):
+        self.load_data()
         # builds the level
         self.all_sprites = pg.sprite.Group()
         self.all_walls = pg.sprite.Group()
